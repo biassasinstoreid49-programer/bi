@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ilusi Keamanan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: radial-gradient(circle at center, #0a0f1e 0%, #000000 100%);
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #00ffcc;
+            text-shadow: 0 0 5px #00ffcc, 0 0 2px #00ffaa;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(10, 20, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 30px 25px 40px 25px;
+            box-shadow: 0 0 40px rgba(0, 255, 200, 0.2);
+            border: 1px solid rgba(0, 255, 200, 0.4);
+            text-align: center;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #00ffcc;
+            box-shadow: 0 0 20px #00ffcc88;
+            transition: transform 0.3s ease;
+        }
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        .message-box p {
+            margin: 18px 0;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        .message-box p:nth-child(1) { animation-delay: 0.2s; }
+        .message-box p:nth-child(2) { animation-delay: 0.6s; }
+        .message-box p:nth-child(3) { animation-delay: 1.0s; }
+        .message-box p:nth-child(4) { animation-delay: 1.4s; }
+        .message-box p:nth-child(5) { animation-delay: 1.8s; }
+        .message-box p:nth-child(6) { animation-delay: 2.2s; }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .line1::before {
+            content: ">";
+            color: #ff3366;
+            animation: blink 1s step-end infinite;
+            margin-right: 8px;
+        }
+        @keyframes blink {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .audio-control {
+            margin-top: 30px;
+        }
+        .audio-control button {
+            background: none;
+            border: 1.5px solid #00ffcc;
+            color: #00ffcc;
+            padding: 10px 20px;
+            font-family: monospace;
+            font-size: 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .audio-control button:hover {
+            background: #00ffcc22;
+            box-shadow: 0 0 12px #00ffcc;
+        }
+        @media (max-width: 550px) {
+            .message-box p { font-size: 0.9rem; }
+            .profile-pic { width: 90px; height: 90px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="profile-section">
+        <!-- Ganti profile.jpg dengan file foto kamu -->
+        <img src="https://drive.google.com/thumbnail?sz=w1000&id=1PpZyFScV1aT85AbI9DIAlj6aKmEk_YBa" alt="Foto Profil" class="profile-pic">
+    </div>
+    <div class="message-box">
+        <p class="line1">Keamanan kalian cuma ilusi</p>
+        <p class="line2">Kami masuk dan tanpa suara, keluar tanpa jejak</p>
+        <p class="line3">Bukan karena kami hebat...</p>
+        <p class="line4">Tapi Karena Kalian terlalu percaya diri</p>
+        <p class="line5">Bahwa Website Kalian Aman</p>
+        <p class="line6">Jika menggunakan Base64 sebagai Pelindung</p>
+    </div>
+    <audio id="bgAudio" loop>
+    <source src="https://drive.google.com/uc?export=open&id=1i-6-nf8XaFh7DXDqV_fyrs6fzTmaoe5i" type="audio/mpeg">
+    </audio>
+    <div class="audio-control" id="audioControl" style="display: none;">
+        <button id="playPauseBtn">🔊 Putar Musik</button>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const audio = document.getElementById('bgAudio');
+        const btn = document.getElementById('playPauseBtn');
+        const controlDiv = document.getElementById('audioControl');
+        let playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                if(btn) btn.textContent = '⏸ Jeda Musik';
+            }).catch(() => {
+                controlDiv.style.display = 'block';
+                if(btn) btn.textContent = '🔊 Putar Musik';
+            });
+        }
+        if(btn) {
+            btn.addEventListener('click', () => {
+                if(audio.paused) {
+                    audio.play();
+                    btn.textContent = '⏸ Jeda Musik';
+                } else {
+                    audio.pause();
+                    btn.textContent = '🔊 Putar Musik';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
